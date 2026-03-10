@@ -404,8 +404,8 @@ Built with modern web technologies and best practices in mind. Designed for scal
 
 ## Connect
 
-GitHub: https://github.com/rootaccessv/rootaccessv2
-Hackathon: RE{DEFINE} Hackathon 2025
+GitHub: https://github.com/Sahilsharma157/rootaccessv2
+Hackathon: RE{DEFINE} Hackathon 2026
 
 ---
 
