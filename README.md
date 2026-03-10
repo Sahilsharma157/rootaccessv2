@@ -412,3 +412,11 @@ Hackathon: RE{DEFINE} Hackathon 2026
 Last Updated: March 2026
 Version: 1.0.0
 Status: Production Ready
+
+<img width="1365" height="630" alt="image" src="https://github.com/user-attachments/assets/a2d7ce01-9b29-4a12-ac61-baaaedf6c552" />
+
+
+<img width="1365" height="627" alt="image" src="https://github.com/user-attachments/assets/6b24df22-2dc9-4c8e-a950-cfb8ad44728c" />
+
+
+
