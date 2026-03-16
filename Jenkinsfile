@@ -13,8 +13,8 @@ pipeline {
                 echo '===================='
                 echo 'Stage 1: Installing Dependencies'
                 echo '===================='
-                sh 'npm install --legacy-peer-deps'
-                echo '✅ Dependencies installed successfully'
+                bat 'npm install --legacy-peer-deps'
+                echo 'Dependencies installed successfully'
             }
         }
         
@@ -23,8 +23,8 @@ pipeline {
                 echo '===================='
                 echo 'Stage 2: Building Application'
                 echo '===================='
-                sh 'npm run build'
-                echo '✅ Next.js build completed successfully'
+                bat 'npm run build'
+                echo 'Next.js build completed successfully'
             }
         }
         
@@ -33,8 +33,8 @@ pipeline {
                 echo '===================='
                 echo 'Stage 3: Building Docker Image'
                 echo '===================='
-                sh 'docker build -t ${DOCKER_IMAGE} .'
-                echo '✅ Docker image built: ${DOCKER_IMAGE}'
+                bat 'docker build -t %DOCKER_IMAGE% .'
+                echo 'Docker image built: %DOCKER_IMAGE%'
             }
         }
         
@@ -43,15 +43,13 @@ pipeline {
                 echo '===================='
                 echo 'Stage 4: Deploying Container'
                 echo '===================='
-                sh '''
-                    echo "Stopping old container..."
-                    docker stop ${DOCKER_CONTAINER} || true
-                    docker rm ${DOCKER_CONTAINER} || true
-                    echo "Starting new container..."
-                    docker run -d -p 3000:3000 --name ${DOCKER_CONTAINER} ${DOCKER_IMAGE}
+                bat '''
+                    docker stop %DOCKER_CONTAINER% || exit /b 0
+                    docker rm %DOCKER_CONTAINER% || exit /b 0
+                    docker run -d -p 3000:3000 --name %DOCKER_CONTAINER% %DOCKER_IMAGE%
                 '''
-                echo '✅ Application deployed successfully'
-                echo '✅ App accessible at http://localhost:3000'
+                echo 'Application deployed successfully'
+                echo 'App accessible at http://localhost:3000'
             }
         }
     }
@@ -59,12 +57,12 @@ pipeline {
     post {
         success {
             echo '================================'
-            echo '✅ Pipeline Execution Successful'
+            echo 'Pipeline Execution Successful'
             echo '================================'
         }
         failure {
             echo '================================'
-            echo '❌ Pipeline Execution Failed'
+            echo 'Pipeline Execution Failed'
             echo '================================'
         }
     }
