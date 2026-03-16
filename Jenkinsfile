@@ -13,7 +13,7 @@ pipeline {
                 echo '===================='
                 echo 'Stage 1: Installing Dependencies'
                 echo '===================='
-                bat 'npm install --legacy-peer-deps'
+                bat 'npm install --include=dev --legacy-peer-deps'
                 echo 'Dependencies installed successfully'
             }
         }
