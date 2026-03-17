@@ -43,11 +43,21 @@ pipeline {
                 echo '===================='
                 echo 'Stage 4: Deploying Container'
                 echo '===================='
-                bat '''
-                    docker stop %DOCKER_CONTAINER% 2>nul || exit /b 0
-                    docker rm %DOCKER_CONTAINER% 2>nul || exit /b 0
-                    docker run -d -p 3000:3000 --name %DOCKER_CONTAINER% %DOCKER_IMAGE%
-                '''
+                withCredentials([
+                    string(credentialsId: 'NEXT_PUBLIC_SUPABASE_URL', variable: 'SUPABASE_URL'),
+                    string(credentialsId: 'NEXT_PUBLIC_SUPABASE_ANON_KEY', variable: 'SUPABASE_ANON_KEY'),
+                    string(credentialsId: 'SUPABASE_SERVICE_ROLE_KEY', variable: 'SERVICE_ROLE_KEY')
+                ]) {
+                    bat '''
+                        docker stop %DOCKER_CONTAINER% 2>nul || exit /b 0
+                        docker rm %DOCKER_CONTAINER% 2>nul || exit /b 0
+                        docker run -d -p 3000:3000 ^
+                          -e NEXT_PUBLIC_SUPABASE_URL=%SUPABASE_URL% ^
+                          -e NEXT_PUBLIC_SUPABASE_ANON_KEY=%SUPABASE_ANON_KEY% ^
+                          -e SUPABASE_SERVICE_ROLE_KEY=%SERVICE_ROLE_KEY% ^
+                          --name %DOCKER_CONTAINER% %DOCKER_IMAGE%
+                    '''
+                }
                 echo 'Application deployed successfully'
                 echo 'App accessible at http://localhost:3000'
             }
