@@ -13,8 +13,14 @@ pipeline {
                 echo '===================='
                 echo 'Stage 1: Installing Dependencies'
                 echo '===================='
-                bat 'npm install --include=dev --legacy-peer-deps'
-                echo 'Dependencies installed successfully'
+                bat '''
+                    if exist node_modules (
+                        echo node_modules found - skipping install
+                    ) else (
+                        npm install --include=dev --legacy-peer-deps
+                    )
+                '''
+                echo 'Dependencies ready'
             }
         }
         

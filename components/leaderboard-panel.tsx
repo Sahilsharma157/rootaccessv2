@@ -101,7 +101,7 @@ export function LeaderboardPanel({ currentUserId, communityId }: LeaderboardPane
   }
 
   return (
-    <div className="h-full flex flex-col bg-background">
+    <div className="h-full overflow-y-auto bg-background">
       {/* Desktop Header */}
       <div className="hidden md:flex p-6 border-b border-border/50 items-center justify-between">
         <div>
@@ -138,59 +138,47 @@ export function LeaderboardPanel({ currentUserId, communityId }: LeaderboardPane
 
       {/* Top 3 Podium */}
       {leaderboard.length >= 3 && (
-        <div className="px-4 md:px-6 pt-4 pb-2">
-          <div className="flex items-end justify-center gap-3">
+        <div className="px-4 md:px-6 pt-3 pb-1">
+          <div className="flex items-end justify-center gap-2">
             {/* 2nd Place */}
-            <div className="flex flex-col items-center gap-2 flex-1">
-              <div className="w-12 h-12 rounded-full bg-slate-500/20 border-2 border-slate-400/50 flex items-center justify-center text-lg font-bold text-slate-500 dark:text-slate-400">
+            <div className="flex flex-col items-center flex-1">
+              <div className="w-8 h-8 rounded-full bg-slate-500/20 border-2 border-slate-400/50 flex items-center justify-center text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">
                 {leaderboard[1]?.username?.[0]?.toUpperCase() ?? '?'}
               </div>
-              <p className="text-xs font-semibold text-foreground truncate max-w-[80px] text-center">@{leaderboard[1]?.username}</p>
-              <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                <Zap className="w-3 h-3" />
-                {leaderboard[1]?.totalXP.toLocaleString()}
-              </div>
-              <div className="w-full bg-slate-400/20 border border-slate-400/30 rounded-t-xl h-16 flex items-center justify-center">
-                <span className="text-2xl font-black text-slate-500 dark:text-slate-400">2</span>
+              <p className="text-[10px] font-semibold text-foreground truncate max-w-[60px] text-center leading-tight mb-1">@{leaderboard[1]?.username}</p>
+              <div className="w-full bg-slate-400/20 border border-slate-400/30 rounded-t-lg h-8 flex items-center justify-center">
+                <span className="text-sm font-black text-slate-500 dark:text-slate-400">2</span>
               </div>
             </div>
 
             {/* 1st Place */}
-            <div className="flex flex-col items-center gap-2 flex-1">
-              <div className="text-yellow-500 text-xl">&#9733;</div>
-              <div className="w-14 h-14 rounded-full bg-yellow-500/20 border-2 border-yellow-400/60 flex items-center justify-center text-xl font-bold text-yellow-600 dark:text-yellow-400">
+            <div className="flex flex-col items-center flex-1">
+              <span className="text-yellow-500 text-sm leading-none mb-0.5">&#9733;</span>
+              <div className="w-9 h-9 rounded-full bg-yellow-500/20 border-2 border-yellow-400/60 flex items-center justify-center text-sm font-bold text-yellow-600 dark:text-yellow-400 mb-1">
                 {leaderboard[0]?.username?.[0]?.toUpperCase() ?? '?'}
               </div>
-              <p className="text-xs font-semibold text-foreground truncate max-w-[80px] text-center">@{leaderboard[0]?.username}</p>
-              <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                <Zap className="w-3 h-3" />
-                {leaderboard[0]?.totalXP.toLocaleString()}
-              </div>
-              <div className="w-full bg-yellow-400/20 border border-yellow-400/40 rounded-t-xl h-24 flex items-center justify-center">
-                <span className="text-3xl font-black text-yellow-500 dark:text-yellow-400">1</span>
+              <p className="text-[10px] font-semibold text-foreground truncate max-w-[60px] text-center leading-tight mb-1">@{leaderboard[0]?.username}</p>
+              <div className="w-full bg-yellow-400/20 border border-yellow-400/40 rounded-t-lg h-12 flex items-center justify-center">
+                <span className="text-base font-black text-yellow-500 dark:text-yellow-400">1</span>
               </div>
             </div>
 
             {/* 3rd Place */}
-            <div className="flex flex-col items-center gap-2 flex-1">
-              <div className="w-12 h-12 rounded-full bg-orange-500/20 border-2 border-orange-400/50 flex items-center justify-center text-lg font-bold text-orange-600 dark:text-orange-400">
+            <div className="flex flex-col items-center flex-1">
+              <div className="w-8 h-8 rounded-full bg-orange-500/20 border-2 border-orange-400/50 flex items-center justify-center text-xs font-bold text-orange-600 dark:text-orange-400 mb-1">
                 {leaderboard[2]?.username?.[0]?.toUpperCase() ?? '?'}
               </div>
-              <p className="text-xs font-semibold text-foreground truncate max-w-[80px] text-center">@{leaderboard[2]?.username}</p>
-              <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                <Zap className="w-3 h-3" />
-                {leaderboard[2]?.totalXP.toLocaleString()}
-              </div>
-              <div className="w-full bg-orange-400/20 border border-orange-400/30 rounded-t-xl h-10 flex items-center justify-center">
-                <span className="text-xl font-black text-orange-500 dark:text-orange-400">3</span>
+              <p className="text-[10px] font-semibold text-foreground truncate max-w-[60px] text-center leading-tight mb-1">@{leaderboard[2]?.username}</p>
+              <div className="w-full bg-orange-400/20 border border-orange-400/30 rounded-t-lg h-5 flex items-center justify-center">
+                <span className="text-sm font-black text-orange-500 dark:text-orange-400">3</span>
               </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Leaderboard List */}
-      <div className="flex-1 overflow-y-auto">
+      {/* Leaderboard List - starts from 4th */}
+      <div>
         <div className="space-y-3 p-4 md:p-6">
           {leaderboard.length === 0 ? (
             <div className="p-12 text-center">
@@ -198,7 +186,7 @@ export function LeaderboardPanel({ currentUserId, communityId }: LeaderboardPane
               <p className="text-xs text-muted-foreground mt-2">Be the first to join</p>
             </div>
           ) : (
-            leaderboard.map((entry) => {
+            leaderboard.filter((entry) => entry.rank > 3).map((entry) => {
               const isCurrentUser = entry.userId === currentUserId
               const xpProgress = ((entry.totalXP % 500) / 500) * 100
 
