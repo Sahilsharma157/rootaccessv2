@@ -5,9 +5,6 @@ pipeline {
         NODE_ENV = 'production'
         DOCKER_IMAGE = 'rootaccess:latest'
         DOCKER_CONTAINER = 'rootaccess'
-        NEXT_PUBLIC_SUPABASE_URL = credentials('NEXT_PUBLIC_SUPABASE_URL')
-        NEXT_PUBLIC_SUPABASE_ANON_KEY = credentials('NEXT_PUBLIC_SUPABASE_ANON_KEY')
-        SUPABASE_SERVICE_ROLE_KEY = credentials('SUPABASE_SERVICE_ROLE_KEY')
     }
     
     stages {
@@ -49,11 +46,7 @@ pipeline {
                 bat '''
                     docker stop %DOCKER_CONTAINER% 2>nul || exit /b 0
                     docker rm %DOCKER_CONTAINER% 2>nul || exit /b 0
-                    docker run -d -p 3000:3000 ^
-                      -e NEXT_PUBLIC_SUPABASE_URL=%NEXT_PUBLIC_SUPABASE_URL% ^
-                      -e NEXT_PUBLIC_SUPABASE_ANON_KEY=%NEXT_PUBLIC_SUPABASE_ANON_KEY% ^
-                      -e SUPABASE_SERVICE_ROLE_KEY=%SUPABASE_SERVICE_ROLE_KEY% ^
-                      --name %DOCKER_CONTAINER% %DOCKER_IMAGE%
+                    docker run -d -p 3000:3000 --name %DOCKER_CONTAINER% %DOCKER_IMAGE%
                 '''
                 echo 'Application deployed successfully'
                 echo 'App accessible at http://localhost:3000'
@@ -74,4 +67,3 @@ pipeline {
         }
     }
 }
-
