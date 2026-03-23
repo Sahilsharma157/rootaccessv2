@@ -43,7 +43,7 @@ export default function LandingPage() {
             <h1 className="text-3xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-balance mb-4 sm:mb-6">
               Find your dev crew.
               <br />
-              <span className="text-primary">Build .</span>
+              <span className="text-primary">Build Together.</span>
             </h1>
             <p className="text-base sm:text-xl text-muted-foreground leading-relaxed mb-8 sm:mb-10 text-pretty px-2 sm:px-0">
               Connect with developer students who share your interests. Join communities, chat in real-time, and find
